@@ -1,47 +1,58 @@
-package com.shift4.medal.api.enums;
+package com.shift4.medal.enums;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import com.shift4.medal.api.exception.UnsupportedMedalException;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
+import com.shift4.medal.exception.UnsupportedMedalException;
 
 import lombok.Getter;
 
-@Getter
-public enum MedalEnum {
+public enum MedalType {
 
-    BRONSE(1),
-    SILVER(2),
-    GOLD(3);
+    BRONZE("bronze", 1),
+    SILVER("silver", 2),
+    GOLD("gold", 3);
 
-    private int score;
+    private final String jsonPropName;
 
-    MedalEnum(int score) {
-        this.score = score;
+    @Getter
+    private final int points;
+
+    MedalType(String jsonPropName, int points) {
+        this.jsonPropName = jsonPropName;
+        this.points = points;
     }
 
-    private static final Map<String, MedalEnum> medalEnumNameToMedalEnumMap;
+    @JsonValue
+    public String toJson() {
+        return jsonPropName;
+    }
+
+    private static final Map<String, MedalType> map;
 
     static {
 
-        final Map<String, MedalEnum> tmpMap = new HashMap<>();
+        final Map<String, MedalType> tmpMap = new HashMap<>();
 
-        for (MedalEnum medalEnum : MedalEnum.values()) {
+        for (MedalType medalType : MedalType.values()) {
 
-            tmpMap.put(medalEnum.name().trim().toUpperCase(), medalEnum);
+            tmpMap.put(medalType.name().trim().toUpperCase(), medalType);
         }
 
-        medalEnumNameToMedalEnumMap = Map.copyOf(tmpMap); // Returns an unmodifiable Map containing the entries of the given Map.
+        map = Map.copyOf(tmpMap); // Returns an unmodifiable Map containing the entries of the given Map.
     }
 
-    public static MedalEnum getMedalEnum(String medalEnumName) {
+    @JsonCreator
+    public static MedalType fromJson(String name) {
 
-        MedalEnum medalEnum = medalEnumNameToMedalEnumMap.get(medalEnumName.trim().toUpperCase());
-        
-        if (medalEnum == null) {
-            throw new UnsupportedMedalException(medalEnumName);
+        MedalType medalType = map.get(name.trim().toUpperCase());
+
+        if (medalType == null) {
+            throw new UnsupportedMedalException("Medal type '%s' is not supported.".formatted(name));
         }
-        
-        return medalEnum;
+
+        return medalType;
     }
 }

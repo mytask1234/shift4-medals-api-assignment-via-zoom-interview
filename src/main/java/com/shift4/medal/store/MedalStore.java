@@ -16,8 +16,8 @@ public class MedalStore {
         for (MedalType t : MedalType.values()) totals.put(t, new AtomicLong(0));
     }
 
-    public void addPoints(MedalType medalType) {
-        totals.get(medalType).addAndGet(medalType.getPoints());
+    public void addPoints(MedalType medalType, int points) {
+        totals.get(medalType).addAndGet(points);
     }
 
     public Map<MedalType, Long> snapshot() {

@@ -18,7 +18,7 @@ public class MedalService {
     public void registerMedal(MedalRgisterRequest requestDto) {
         MedalType medalType = requestDto.medalType(); // already deserialized/validated
 
-        store.addPoints(medalType);
+        store.addPoints(medalType, medalType.getPoints());
     }
 
     public MedalRatingResponse getRatings() {

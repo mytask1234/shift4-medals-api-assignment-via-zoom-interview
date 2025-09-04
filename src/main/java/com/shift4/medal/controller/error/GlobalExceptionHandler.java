@@ -24,8 +24,8 @@ public class GlobalExceptionHandler {
                 return ResponseEntity.badRequest().body(t.getMessage());
             }
 
-            if (t instanceof MethodArgumentNotValidException manv) {
-                String msg = getFirstValidationMessage(manv);
+            if (t instanceof MethodArgumentNotValidException e) {
+                String msg = getFirstValidationMessage(e);
                 return ResponseEntity.badRequest().body(msg != null ? msg : "Validation failed");
             }
 
@@ -39,8 +39,8 @@ public class GlobalExceptionHandler {
         return ResponseEntity.internalServerError().body("Internal error");
     }
 
-    private String getFirstValidationMessage(MethodArgumentNotValidException ex) {
-        FieldError fe = ex.getBindingResult().getFieldError(); // first field error (may be null)
+    private String getFirstValidationMessage(MethodArgumentNotValidException e) {
+        FieldError fe = e.getBindingResult().getFieldError(); // first field error (may be null)
         return fe != null ? fe.getDefaultMessage() : null;
     }
 }

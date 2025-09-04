@@ -26,7 +26,7 @@ public enum MedalType {
     }
 
     @JsonValue
-    public String toJson() {
+    public String jsonPropName() {
         return jsonPropName;
     }
 
@@ -38,7 +38,7 @@ public enum MedalType {
 
         for (MedalType medalType : MedalType.values()) {
 
-            tmpMap.put(medalType.name().trim().toUpperCase(), medalType);
+            tmpMap.put(medalType.jsonPropName(), medalType);
         }
 
         map = Map.copyOf(tmpMap); // Returns an unmodifiable Map containing the entries of the given Map.
@@ -47,7 +47,7 @@ public enum MedalType {
     @JsonCreator
     public static MedalType fromJson(String name) {
 
-        MedalType medalType = map.get(name.trim().toUpperCase());
+        MedalType medalType = map.get(name.trim().toLowerCase());
 
         if (medalType == null) {
             throw new UnsupportedMedalException("Medal type '%s' is not supported.".formatted(name));

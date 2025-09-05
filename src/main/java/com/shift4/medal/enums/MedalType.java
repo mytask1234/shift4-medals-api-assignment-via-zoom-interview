@@ -47,6 +47,10 @@ public enum MedalType {
     @JsonCreator
     public static MedalType fromJson(String name) {
 
+        if (name == null) {
+            throw new IllegalArgumentException("name must not be null");
+        }
+
         MedalType medalType = map.get(name.trim().toLowerCase());
 
         if (medalType == null) {

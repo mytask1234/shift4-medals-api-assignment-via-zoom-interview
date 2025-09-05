@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.shift4.medal.dto.MedalRatingResponse;
-import com.shift4.medal.dto.MedalRgisterRequest;
+import com.shift4.medal.dto.MedalRegisterRequest;
 import com.shift4.medal.service.MedalService;
 
 import jakarta.validation.Valid;
@@ -23,10 +23,10 @@ public class MedalController {
     public MedalController(MedalService service) { this.service = service; }
 
     @PostMapping("/register")
-    public ResponseEntity<Void> registerMedal(@Valid @RequestBody MedalRgisterRequest requestDto) {
+    public ResponseEntity<Void> registerMedal(@Valid @RequestBody MedalRegisterRequest requestDto) {
         log.debug("inside registerMedal(MedalRgisterRequest) ; requestDto={}", requestDto);
         service.registerMedal(requestDto);
-        return ResponseEntity.accepted().build();
+        return ResponseEntity.noContent().build();
     }
 
     @GetMapping("/rating")

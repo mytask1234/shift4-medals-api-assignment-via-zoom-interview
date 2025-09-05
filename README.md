@@ -1,3 +1,11 @@
+## About this repo
+
+At my second Zoom interview with Shift4, I was asked by the technical interviwer, to share my screen and open my Java IDE.
+He then send me the Medals API assignment, you can find below.
+In this Github repo you can find my solution to this assignment.
+Enjoy and Good Luck :)
+
+## The Medals API assignment instructions
 
 ### 1. Registering medals
 

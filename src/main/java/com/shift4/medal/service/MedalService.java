@@ -5,7 +5,7 @@ import java.util.Map;
 import org.springframework.stereotype.Service;
 
 import com.shift4.medal.dto.MedalRatingResponse;
-import com.shift4.medal.dto.MedalRgisterRequest;
+import com.shift4.medal.dto.MedalRegisterRequest;
 import com.shift4.medal.enums.MedalType;
 import com.shift4.medal.store.MedalStore;
 
@@ -15,7 +15,7 @@ public class MedalService {
 
     public MedalService(MedalStore store) { this.store = store; }
 
-    public void registerMedal(MedalRgisterRequest requestDto) {
+    public void registerMedal(MedalRegisterRequest requestDto) {
         MedalType medalType = requestDto.medalType(); // already deserialized/validated
 
         store.addPoints(medalType, medalType.getPoints());

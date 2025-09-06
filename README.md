@@ -2,7 +2,7 @@
 
 At my second Zoom interview with Shift4, I was asked by the technical interviewer, to share my screen and open my Java IDE.  
 He then sent me the Medals API assignment (via the Zoom chat). You can find that assignment below.  
-He also asked me not to use the Internet at all (no Google, ChatGPT, ech), which I think is totally unfair.  
+He also asked me not to use the Internet at all (no Google, ChatGPT, etc), which I think is totally unfair.  
 In this Github repo you can find my solution to this assignment.  
 
 ## The Medals API assignment instructions (sent by the interviewer)

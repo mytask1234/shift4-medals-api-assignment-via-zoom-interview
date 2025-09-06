@@ -1,11 +1,11 @@
 ## About this repo
 
-At my second Zoom interview with Shift4, I was asked by the technical interviwer, to share my screen and open my Java IDE.
-He then send me the Medals API assignment, you can find below.
-In this Github repo you can find my solution to this assignment.
-Enjoy and Good Luck :)
+At my second Zoom interview with Shift4, I was asked by the technical interviewer, to share my screen and open my Java IDE.  
+He then sent me the Medals API assignment (via the Zoom chat). You can find that assignment below.  
+He also asked me not to use the Internet at all (no Google, ChatGPT, ech), which I think is totally unfair.  
+In this Github repo you can find my solution to this assignment.  
 
-## The Medals API assignment instructions
+## The Medals API assignment instructions (sent by the interviewer)
 
 ### 1. Registering medals
 
@@ -38,3 +38,74 @@ Create an API to get the overall medal rating where total accumulated points wil
   "gold": 6
 }
 ```
+
+## How to run and play with this app
+
+#### How to run the app
+
+in your terminal, go to the project root directory, and run the command:
+
+```sh
+./mvnw spring-boot:run
+```
+
+#### Register some medals
+
+to register some medals, open another terminal tab, and run these commands:
+
+```sh
+curl -X POST \
+  http://localhost:8080/api/medals/register \
+  -H 'Content-Type: application/json' \
+  -d '{"medalType": "BRONZE"}' -i
+
+curl -X POST \
+  http://localhost:8080/api/medals/register \
+  -H 'Content-Type: application/json' \
+  -d '{"medalType": "SILVER"}' -i
+
+curl -X POST \
+  http://localhost:8080/api/medals/register \
+  -H 'Content-Type: application/json' \
+  -d '{"medalType": "BRONZE"}' -i
+
+curl -X POST \
+  http://localhost:8080/api/medals/register \
+  -H 'Content-Type: application/json' \
+  -d '{"medalType": "GOLD"}' -i
+
+curl -X POST \
+  http://localhost:8080/api/medals/register \
+  -H 'Content-Type: application/json' \
+  -d '{"medalType": "GOLD"}' -i
+```
+
+#### Get the medals rating
+
+```sh
+curl -X GET \
+  http://localhost:8080/api/medals/rating -i
+```
+
+#### Check error handling
+
+you can also issue some invalid requests, to test the error handling:
+
+```sh
+curl -X POST \
+  http://localhost:8080/api/medals/register \
+  -H 'Content-Type: application/json' \
+  -d '{"medalType": "INVALID"}' -i
+
+curl -X POST \
+  http://localhost:8080/api/medals/register \
+  -H 'Content-Type: application/json' \
+  -d '{"medalType": null}' -i
+
+curl -X POST \
+  http://localhost:8080/api/medals/register \
+  -H 'Content-Type: application/json' \
+  -d '{"medalType": }' -i
+```
+
+Enjoy, and Good Luck :)  
